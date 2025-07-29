@@ -612,16 +612,6 @@ with tab6:
             help="Pilih triwulan untuk analisis"
         )
 
-    # Debug information (will be hidden in production)
-    with st.expander("🔍 Debug Info - Data Availability", expanded=False):
-        st.write("**Available data summary:**")
-        st.write(f"- Total records: {len(df)}")
-        st.write(f"- Available years: {sorted(df['Tahun'].unique())}")
-        st.write(f"- Available quarters for {pilihan_tahun}: {sorted(df[df['Tahun'] == pilihan_tahun]['Triwulan'].unique())}")
-        st.write(f"- Available expense types: {df['Jenis Belanja'].unique()}")
-        st.write(f"- Selected expense types: {pilihan_jenis}")
-        st.write(f"- Selected quarters: {pilihan_triwulan}")
-
     # Apply filters with more defensive approach
     df_filtered = df.copy()
     
