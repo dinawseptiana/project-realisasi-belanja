@@ -1,3 +1,6 @@
+import platform
+st.write("Python version:", platform.python_version())
+
 import streamlit as st
 import pandas as pd
 import plotly.express as px
