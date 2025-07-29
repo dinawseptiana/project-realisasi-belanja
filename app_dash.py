@@ -161,7 +161,7 @@ st.markdown("""
         <img src='https://raw.githubusercontent.com/dinawseptiana/project-realisasi-belanja/main/logo.png' width='120'/>
         <div>
             <h2 style='color: white !important; font-weight: bold !important;'>Dashboard Anggaran & Realisasi Belanja</h2>
-            <p style='margin: 0; opacity: 0.9; font-size: 1.1rem; color: white;'>Direktorat Jenderal Perbendaharaan (DJPb) Kementerian Keuangan</p>
+            <p style='margin: 0; opacity: 0.9; font-size: 1.1rem; color: white;'>Direktorat Jenderal Perbendaharaan (DJPb) Kementerian Keuangan Republik Indonesia</p>
         </div>
     </div>
 """, unsafe_allow_html=True)
