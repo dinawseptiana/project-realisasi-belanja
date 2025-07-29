@@ -10,9 +10,11 @@ st.set_page_config(page_title="Dashboard Anggaran & Realisasi Belanja", layout="
 
 # === Logo Header ===
 st.markdown("""
-    <div style='display: flex; align-items: center; gap: 1rem;'>
-        <img src='https://raw.githubusercontent.com/dinawseptiana/project-realisasi-belanja/main/logo.png' width='155'/>
-        <h2 style='margin: 0; padding-top: 10px;'>Analisis Anggaran dan Realisasi Belanja Direktorat Jenderal Perbendaharaan (DJPb) Kementerian Keuangan</h2>
+    <div style='display: flex; align-items: center; gap: 1rem; flex-wrap: wrap;'>
+        <img src='https://raw.githubusercontent.com/dinawseptiana/project-realisasi-belanja/main/logo.png' width='140'/>
+        <div style='flex: 1; min-width: 250px;'>
+            <h4 style='margin: 0; font-size: 1.1rem;'>💼 Analisis Anggaran dan Realisasi Belanja Direktorat Jenderal Perbendaharaan (DJPb) Kementerian Keuangan</h4>
+        </div>
     </div>
     <hr style='margin-top: 10px; margin-bottom: 20px;'>
 """, unsafe_allow_html=True)
