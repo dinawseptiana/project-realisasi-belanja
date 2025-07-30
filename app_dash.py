@@ -253,11 +253,11 @@ with tab1:
         <div class='info-box'>
             <h4>✨ Fitur Utama Dashboard</h4>
             <ul style='line-height: 1.8;'>
-                <li>📈 Visualisasi tren realisasi & anggaran berdasarkan triwulan</li>
-                <li>🥧 Distribusi realisasi berdasarkan jenis belanja</li>
-                <li>🤖 Prediksi belanja untuk Triwulan III & IV Tahun 2025</li>
-                <li>📥 Export data hasil prediksi dalam format Excel</li>
-                <li>🔍 Eksplorasi data interaktif dengan filter dinamis</li>
+                <li>Visualisasi tren realisasi & anggaran berdasarkan triwulan</li>
+                <li>Distribusi realisasi berdasarkan jenis belanja</li>
+                <li>Prediksi belanja untuk Triwulan III & IV Tahun 2025</li>
+                <li>Export data hasil prediksi dalam format Excel</li>
+                <li>Eksplorasi data interaktif dengan filter dinamis</li>
             </ul>
         </div>
         """, unsafe_allow_html=True)
