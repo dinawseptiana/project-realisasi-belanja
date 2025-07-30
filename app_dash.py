@@ -239,8 +239,8 @@ with tab1:
     <div class='welcome-card'>
         <h3 style='color: #2c3e50; margin-bottom: 1rem;'>🎯 Selamat Datang di Dashboard Realisasi Belanja</h3>
         <p style='font-size: 1.1rem; color: #34495e; line-height: 1.6;'>
-            Dashboard ini dikembangkan untuk menyajikan dan menganalisis data realisasi belanja berdasarkan jenis belanja 
-            <b>Direktorat Jenderal Perbendaharaan (DJPb)</b> tahun 2023 - 2025.
+            Dashboard ini dikembangkan untuk menyajikan dan menganalisis data realisasi anggaran belanja berdasarkan jenis belanja 
+            <b>Direktorat Jenderal Perbendaharaan (DJPb)</b> dari tahun 2023 hingga 2025.
         </p>
     </div>
     """, unsafe_allow_html=True)
