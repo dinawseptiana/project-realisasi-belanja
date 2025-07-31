@@ -14,115 +14,226 @@ st.set_page_config(
     initial_sidebar_state="collapsed"
 )
 
-# === Custom CSS ===
+# === Enhanced CSS for Dark/Light Theme Compatibility ===
 st.markdown("""
 <style>
-    /* Set white background for entire app */
+    /* Base styling that works for both themes */
     .stApp {
-        background-color: white !important;
+        background-color: var(--background-color) !important;
     }
     
     .main > div {
         padding-top: 2rem;
         padding-left: 1rem;
         padding-right: 1rem;
-        background-color: white !important;
     }
     
-    /* Ensure sidebar is also white if used */
-    .css-1d391kg {
-        background-color: white !important;
+    /* Dark theme variables */
+    :root {
+        --text-color-light: #262730;
+        --text-color-dark: #fafafa;
+        --bg-color-light: #ffffff;
+        --bg-color-dark: #0e1117;
+        --card-bg-light: #ffffff;
+        --card-bg-dark: #262730;
+        --border-color-light: #e6e6e6;
+        --border-color-dark: #4a4a4a;
     }
     
+    /* Detect dark theme and apply appropriate colors */
+    [data-theme="dark"] {
+        --background-color: var(--bg-color-dark);
+        --text-color: var(--text-color-dark);
+        --card-background: var(--card-bg-dark);
+        --border-color: var(--border-color-dark);
+    }
+    
+    [data-theme="light"] {
+        --background-color: var(--bg-color-light);
+        --text-color: var(--text-color-light);
+        --card-background: var(--card-bg-light);
+        --border-color: var(--border-color-light);
+    }
+    
+    /* Auto-detect theme based on Streamlit's default colors */
+    @media (prefers-color-scheme: dark) {
+        .stApp[data-theme="auto"] {
+            --background-color: var(--bg-color-dark);
+            --text-color: var(--text-color-dark);
+            --card-background: var(--card-bg-dark);
+            --border-color: var(--border-color-dark);
+        }
+    }
+    
+    @media (prefers-color-scheme: light) {
+        .stApp[data-theme="auto"] {
+            --background-color: var(--bg-color-light);
+            --text-color: var(--text-color-light);
+            --card-background: var(--card-bg-light);
+            --border-color: var(--border-color-light);
+        }
+    }
+    
+    /* Streamlit theme detection */
+    .stApp {
+        color: var(--text-color, #262730);
+    }
+    
+    /* Dark theme overrides */
+    [data-testid="stAppViewContainer"] > .main {
+        background-color: transparent;
+    }
+    
+    /* Enhanced metric cards with theme support */
     .metric-card {
         background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
         padding: 1rem;
         border-radius: 10px;
-        color: white;
+        color: white !important;
         text-align: center;
         box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
         margin-bottom: 1rem;
+        border: 1px solid rgba(255, 255, 255, 0.1);
     }
     
     .metric-value {
         font-size: 1.8rem;
         font-weight: bold;
         margin: 0.5rem 0;
+        color: white !important;
     }
     
     .metric-label {
         font-size: 0.9rem;
         opacity: 0.9;
         margin: 0;
+        color: white !important;
     }
     
+    /* Welcome card with theme adaptation */
     .welcome-card {
-        background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
+        background: linear-gradient(135deg, rgba(245, 247, 250, 0.95) 0%, rgba(195, 207, 226, 0.95) 100%);
         padding: 2rem;
         border-radius: 15px;
         margin: 1rem 0;
         box-shadow: 0 8px 25px rgba(0,0,0,0.1);
+        border: 1px solid rgba(0, 0, 0, 0.05);
     }
     
+    /* Dark theme welcome card */
+    @media (prefers-color-scheme: dark) {
+        .welcome-card {
+            background: linear-gradient(135deg, rgba(38, 39, 48, 0.95) 0%, rgba(68, 70, 84, 0.95) 100%);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            color: #fafafa !important;
+        }
+        
+        .welcome-card h3 {
+            color: #fafafa !important;
+        }
+        
+        .welcome-card p {
+            color: #e0e0e0 !important;
+        }
+    }
+    
+    /* Section headers with better contrast */
     .section-header {
         background: linear-gradient(90deg, #4facfe 0%, #00f2fe 100%);
-        color: white;
+        color: white !important;
         padding: 1rem;
         border-radius: 10px;
         margin: 1rem 0;
         text-align: center;
         font-weight: bold;
+        border: 1px solid rgba(255, 255, 255, 0.1);
     }
     
+    .section-header h3 {
+        color: white !important;
+        margin: 0;
+    }
+    
+    /* Info boxes with theme support */
     .info-box {
-        background-color: #e7f3ff;
+        background-color: rgba(231, 243, 255, 0.9);
         border-left: 4px solid #2196F3;
         padding: 1rem;
         margin: 1rem 0;
         border-radius: 5px;
+        color: #1a1a1a;
     }
     
     .success-box {
-        background-color: #e8f5e8;
+        background-color: rgba(232, 245, 232, 0.9);
         border-left: 4px solid #4CAF50;
         padding: 1rem;
         margin: 1rem 0;
         border-radius: 5px;
+        color: #1a1a1a;
     }
     
+    /* Dark theme info boxes */
+    @media (prefers-color-scheme: dark) {
+        .info-box {
+            background-color: rgba(33, 150, 243, 0.1);
+            border-left: 4px solid #2196F3;
+            color: #e0e0e0 !important;
+        }
+        
+        .success-box {
+            background-color: rgba(76, 175, 80, 0.1);
+            border-left: 4px solid #4CAF50;
+            color: #e0e0e0 !important;
+        }
+        
+        .info-box h4, .success-box h4 {
+            color: #fafafa !important;
+        }
+        
+        .info-box ul, .success-box ul,
+        .info-box p, .success-box p {
+            color: #e0e0e0 !important;
+        }
+    }
+    
+    /* Enhanced tabs styling */
     .stTabs [data-baseweb="tab-list"] {
         gap: 2px;
-        background-color: white !important;
+        background-color: transparent !important;
     }
     
     .stTabs [data-baseweb="tab"] {
         height: 50px;
         padding-left: 20px;
         padding-right: 20px;
-        background-color: #f0f2f6;
+        background-color: rgba(240, 242, 246, 0.8);
         border-radius: 10px 10px 0 0;
         color: #1f77b4;
         font-weight: bold;
+        border: 1px solid rgba(0, 0, 0, 0.1);
     }
     
     .stTabs [aria-selected="true"] {
-        background-color: #1f77b4;
-        color: white;
+        background-color: #1f77b4 !important;
+        color: white !important;
     }
     
-    .download-button {
-        background: linear-gradient(90deg, #56ab2f 0%, #a8e6cf 100%);
-        color: white;
-        padding: 0.5rem 1rem;
-        border-radius: 25px;
-        border: none;
-        font-weight: bold;
-        cursor: pointer;
-        text-decoration: none;
-        display: inline-block;
-        margin: 1rem 0;
+    /* Dark theme tabs */
+    @media (prefers-color-scheme: dark) {
+        .stTabs [data-baseweb="tab"] {
+            background-color: rgba(38, 39, 48, 0.8);
+            color: #64b5f6;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+        
+        .stTabs [aria-selected="true"] {
+            background-color: #1f77b4 !important;
+            color: white !important;
+        }
     }
     
+    /* Logo header with enhanced contrast */
     .logo-header {
         display: flex;
         align-items: center;
@@ -130,9 +241,10 @@ st.markdown("""
         background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
         padding: 1.5rem;
         border-radius: 15px;
-        color: white;
+        color: white !important;
         margin-bottom: 2rem;
         box-shadow: 0 4px 15px rgba(0,0,0,0.2);
+        border: 1px solid rgba(255, 255, 255, 0.1);
     }
     
     .logo-header h2 {
@@ -142,15 +254,99 @@ st.markdown("""
         text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
     }
     
-    /* Ensure content containers have white background */
+    .logo-header p {
+        color: rgba(255, 255, 255, 0.9) !important;
+    }
+    
+    /* Container backgrounds */
     .block-container {
-        background-color: white !important;
+        background-color: transparent !important;
         padding-top: 1rem !important;
     }
     
     /* Tab content background */
     .stTabs > div > div > div > div {
-        background-color: white !important;
+        background-color: transparent !important;
+    }
+    
+    /* DataFrame styling for dark theme */
+    @media (prefers-color-scheme: dark) {
+        .stDataFrame {
+            background-color: rgba(38, 39, 48, 0.3) !important;
+        }
+        
+        .stDataFrame [data-testid="stTable"] {
+            background-color: rgba(38, 39, 48, 0.5) !important;
+        }
+    }
+    
+    /* Ensure all text is visible in both themes */
+    .stMarkdown, .stText, p, h1, h2, h3, h4, h5, h6, span, div {
+        color: inherit !important;
+    }
+    
+    /* Footer styling */
+    .footer-content {
+        text-align: center;
+        padding: 1rem;
+        background-color: rgba(248, 249, 250, 0.8);
+        border-radius: 10px;
+        margin-top: 2rem;
+        border: 1px solid rgba(0, 0, 0, 0.05);
+    }
+    
+    @media (prefers-color-scheme: dark) {
+        .footer-content {
+            background-color: rgba(38, 39, 48, 0.8);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+        
+        .footer-content p {
+            color: #b0b0b0 !important;
+        }
+    }
+    
+    /* Enhanced download button */
+    .download-button {
+        background: linear-gradient(90deg, #56ab2f 0%, #a8e6cf 100%);
+        color: white !important;
+        padding: 0.5rem 1rem;
+        border-radius: 25px;
+        border: none;
+        font-weight: bold;
+        cursor: pointer;
+        text-decoration: none;
+        display: inline-block;
+        margin: 1rem 0;
+        box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    }
+    
+    /* Plotly chart backgrounds for dark theme */
+    @media (prefers-color-scheme: dark) {
+        .js-plotly-plot .plotly .modebar {
+            background-color: rgba(38, 39, 48, 0.8) !important;
+        }
+    }
+    
+    /* Warning and error text fixes */
+    .stAlert > div {
+        background-color: inherit !important;
+    }
+    
+    .stSuccess > div {
+        background-color: inherit !important;
+    }
+    
+    .stInfo > div {
+        background-color: inherit !important;
+    }
+    
+    .stWarning > div {
+        background-color: inherit !important;
+    }
+    
+    .stError > div {
+        background-color: inherit !important;
     }
 </style>
 """, unsafe_allow_html=True)
@@ -237,8 +433,8 @@ tab1, tab2, tab3, tab4, tab5, tab6 = st.tabs([
 with tab1:
     st.markdown("""
     <div class='welcome-card'>
-        <h3 style='color: #2c3e50; margin-bottom: 1rem;'>🎯 Selamat Datang di Dashboard Realisasi Belanja</h3>
-        <p style='font-size: 1.1rem; color: #34495e; line-height: 1.6;'>
+        <h3 style='margin-bottom: 1rem;'>🎯 Selamat Datang di Dashboard Realisasi Belanja</h3>
+        <p style='font-size: 1.1rem; line-height: 1.6;'>
             Dashboard ini dikembangkan untuk menyajikan dan menganalisis data realisasi anggaran belanja berdasarkan jenis belanja 
             <b>Direktorat Jenderal Perbendaharaan (DJPb)</b> dari tahun 2023 hingga 2025.
         </p>
@@ -310,7 +506,7 @@ with tab2:
     df_agg['Label'] = df_agg['Tahun'].astype(str) + "-TW" + df_agg['Triwulan'].astype(str)
     df_agg['Efisiensi'] = (df_agg['Realisasi'] / df_agg['Anggaran'] * 100).round(1)
     
-    # Enhanced bar chart
+    # Enhanced bar chart with dark theme template
     fig = go.Figure()
     fig.add_trace(go.Bar(
         name='Anggaran',
@@ -335,7 +531,9 @@ with tab2:
         yaxis_title="Nilai (Rupiah)",
         barmode='group',
         template='plotly_white',
-        height=500
+        height=500,
+        paper_bgcolor='rgba(0,0,0,0)',
+        plot_bgcolor='rgba(0,0,0,0)'
     )
     st.plotly_chart(fig, use_container_width=True)
     
@@ -348,7 +546,12 @@ with tab2:
         title="📈 Tren Efisiensi Realisasi Anggaran (%)",
         color_discrete_sequence=['#e74c3c']
     )
-    fig_eff.update_layout(template='plotly_white', yaxis_title="Efisiensi (%)")
+    fig_eff.update_layout(
+        template='plotly_white', 
+        yaxis_title="Efisiensi (%)",
+        paper_bgcolor='rgba(0,0,0,0)',
+        plot_bgcolor='rgba(0,0,0,0)'
+    )
     st.plotly_chart(fig_eff, use_container_width=True)
     
     # Summary table
@@ -375,7 +578,11 @@ with tab3:
         color_discrete_sequence=px.colors.qualitative.Set3
     )
     fig_pie_total.update_traces(textposition='inside', textinfo='percent+label')
-    fig_pie_total.update_layout(height=500)
+    fig_pie_total.update_layout(
+        height=500,
+        paper_bgcolor='rgba(0,0,0,0)',
+        plot_bgcolor='rgba(0,0,0,0)'
+    )
     st.plotly_chart(fig_pie_total, use_container_width=True)
 
     # Year-by-year analysis
@@ -397,6 +604,10 @@ with tab3:
                 color_discrete_sequence=px.colors.qualitative.Pastel
             )
             fig_pie_tahun.update_traces(textposition='inside', textinfo='percent+label')
+            fig_pie_tahun.update_layout(
+                paper_bgcolor='rgba(0,0,0,0)',
+                plot_bgcolor='rgba(0,0,0,0)'
+            )
             st.plotly_chart(fig_pie_tahun, use_container_width=True)
         
         with col2:
@@ -425,7 +636,12 @@ with tab3:
                     color_discrete_sequence=px.colors.qualitative.Pastel
                 )
                 fig_tw.update_traces(textposition='inside', textinfo='percent')
-                fig_tw.update_layout(height=300, showlegend=False)
+                fig_tw.update_layout(
+                    height=300, 
+                    showlegend=False,
+                    paper_bgcolor='rgba(0,0,0,0)',
+                    plot_bgcolor='rgba(0,0,0,0)'
+                )
                 triwulan_cols[i].plotly_chart(fig_tw, use_container_width=True)
 
 # === Tab 4: Prediksi ===
@@ -490,7 +706,12 @@ with tab4:
         title="📈 Prediksi Realisasi per Jenis Belanja",
         color_discrete_sequence=px.colors.qualitative.Set2
     )
-    fig_pred.update_layout(template='plotly_white', height=500)
+    fig_pred.update_layout(
+        template='plotly_white', 
+        height=500,
+        paper_bgcolor='rgba(0,0,0,0)',
+        plot_bgcolor='rgba(0,0,0,0)'
+    )
     st.plotly_chart(fig_pred, use_container_width=True)
 
     # Download functionality
@@ -535,7 +756,12 @@ with tab5:
         text='Sisa Anggaran'
     )
     fig_sisa.update_traces(texttemplate='Rp %{text:,.0f}', textposition='outside')
-    fig_sisa.update_layout(template='plotly_white', height=500)
+    fig_sisa.update_layout(
+        template='plotly_white', 
+        height=500,
+        paper_bgcolor='rgba(0,0,0,0)',
+        plot_bgcolor='rgba(0,0,0,0)'
+    )
     st.plotly_chart(fig_sisa, use_container_width=True)
     
     # Efficiency analysis
@@ -686,7 +912,9 @@ with tab6:
             template='plotly_white',
             height=600,
             xaxis_title="Anggaran (Rp)",
-            yaxis_title="Realisasi (Rp)"
+            yaxis_title="Realisasi (Rp)",
+            paper_bgcolor='rgba(0,0,0,0)',
+            plot_bgcolor='rgba(0,0,0,0)'
         )
         st.plotly_chart(fig_scatter, use_container_width=True)
         
@@ -739,7 +967,9 @@ with tab6:
             yaxis2=dict(title="Efisiensi (%)", side="right", overlaying="y"),
             template='plotly_white',
             height=500,
-            barmode='group'
+            barmode='group',
+            paper_bgcolor='rgba(0,0,0,0)',
+            plot_bgcolor='rgba(0,0,0,0)'
         )
         st.plotly_chart(fig_performance, use_container_width=True)
         
@@ -786,15 +1016,15 @@ with tab6:
 
 # === Footer ===
 st.markdown("---")
-st.markdown("""
-<div style='text-align: center; padding: 1rem; background-color: #f8f9fa; border-radius: 10px; margin-top: 2rem;'>
-    <p style='margin: 0; color: #6c757d;'>
+st.markdown(f"""
+<div class='footer-content'>
+    <p style='margin: 0;'>
         📊 <b>Dashboard Realisasi Belanja DJPb</b> | 
         🏛️ Kementerian Keuangan Republik Indonesia | 
-        📅 {current_year}
+        📅 {datetime.now().year}
     </p>
-    <p style='margin: 0.5rem 0 0 0; color: #6c757d; font-size: 0.9rem;'>
+    <p style='margin: 0.5rem 0 0 0; font-size: 0.9rem; font-style: italic;'>
         Created by Dina Wachidah Septiana
     </p>
 </div>
-""".format(current_year=datetime.now().year), unsafe_allow_html=True)
+""", unsafe_allow_html=True)
