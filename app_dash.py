@@ -794,7 +794,7 @@ st.markdown("""
         📅 {current_year}
     </p>
     <p style='margin: 0.5rem 0 0 0; color: #6c757d; font-size: 0.9rem;'>
-        Created by Dina Wachidah Septiana
+        \033[3mCreated by Dina Wachidah Septiana\033[0m
     </p>
 </div>
 """.format(current_year=datetime.now().year), unsafe_allow_html=True)
